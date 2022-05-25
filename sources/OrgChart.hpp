@@ -16,10 +16,10 @@ namespace ariel{
         OrgChart(){
 
         }
-        OrgChart(const OrgChart&) =delete;
-        OrgChart& operator =(const OrgChart&)=delete;
-        OrgChart(OrgChart&&) = delete;
-        OrgChart& operator=(OrgChart&&) = delete;
+        OrgChart(const OrgChart&) =default;
+        OrgChart& operator =(const OrgChart&)=default;
+        OrgChart(OrgChart&&) = default;
+        OrgChart& operator=(OrgChart&&) = default;
         ~OrgChart();
         int size();
         int length();

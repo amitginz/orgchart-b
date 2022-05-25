@@ -8,9 +8,7 @@ using namespace ariel;
 #include <string>
 #include <vector>
 using namespace std;
-    // OrgChart::OrgChart(){
-        
-    // }
+    
     OrgChart::~OrgChart(){
 
     }
@@ -37,7 +35,7 @@ using namespace std;
         return *this;
     }
 
-    //add sub to the head of chart
+    //add sub to the chart
     OrgChart& OrgChart::add_sub(const string& root, const string& sub){
         Node sun;
         sun.data = sub;
@@ -80,7 +78,7 @@ using namespace std;
         output<<"end of org"<<endl;
         return output;
     }
-
+    //iterator of the tree with level order
     vector<string>::iterator OrgChart::begin_level_order(){
         set_place();
         vector<string> temp;
@@ -109,6 +107,7 @@ using namespace std;
         }
         return this->it;
     }
+    //return the end of level_order
     vector<string>::iterator OrgChart::end_level_order(){
         if(this->chart.empty()){
             throw runtime_error("chart is empty..");
@@ -164,7 +163,7 @@ using namespace std;
         }
         return this->it;
     }
-
+    //return the end of iterator reverse order
     vector<string>::iterator OrgChart::reverse_order(){
         if(this->chart.empty()){
             throw runtime_error("chart is empty..");
@@ -214,22 +213,25 @@ using namespace std;
         }
         return this->it;
     }
+    //return the end of iterator
     vector<string>::iterator OrgChart::end_preorder(){
         if(this->chart.empty()){
             throw runtime_error("chart is empty..");
         }
         return this->chart.end();
     }
-
+    // icrement iterator
     vector<string>::iterator OrgChart::operator++(){
         ++this->it;
         return this->it;
     }
+    // icrement iterator
     vector<string>::iterator OrgChart::operator++(int){
         vector<string>::iterator tmp = this->it;
         ++this->it;
         return tmp;
     }
+    //return the begin of iterator(level order)
     vector<string>::iterator OrgChart::begin(){
         uint place = 0;
         vector<string> temp;
@@ -241,20 +243,23 @@ using namespace std;
         this->it = this->chart.begin();
         return this->it;
     }
-
+    //return the end of iterator
     vector<string>::iterator OrgChart::end(){
         return this->chart.end();
     }
+    //return pointer to the letter
     string* OrgChart::operator->(){
         return &(*this->it);
     }
+    //return pointer to the letter
     string OrgChart::operator*(){
         return *this->it;
     }
+    //return the size of the letter
     int OrgChart::size(){
         return this->chart.at(this->place++).size();
     }
-
+    //return the size of the letter
     int OrgChart::length(){
         return this->chart.at(this->place++).size();
     }
@@ -274,6 +279,7 @@ using namespace std;
     bool OrgChart::operator==(const OrgChart& rhs){
         return this->it == rhs.it;
     }
+    //zero the count for the length and count function
     void OrgChart::set_place(){
         this->place = 0;
     }

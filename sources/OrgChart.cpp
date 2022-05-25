@@ -28,6 +28,10 @@ using namespace std;
         }
         else{
             this->chart.at(0)= temp.data;
+            temp.father = this->chart1.at(0).father;
+            temp.left = this->chart1.at(0).left;
+            temp.middle = this->chart1.at(0).middle;
+            temp.right = this->chart1.at(0).right;
             this->chart1.at(0)= temp;
         }
         return *this;
@@ -93,6 +97,7 @@ using namespace std;
                 }
             }
         }
+        
         this->chart = temp;
         this->it = this->chart.begin();
         if(this->chart.empty()){
@@ -106,6 +111,8 @@ using namespace std;
         }
         return this->chart.end();
     }
+
+     //iterate reverse level order on the chart
     vector<string>::iterator OrgChart::begin_reverse_order(){
         uint place = 0;
         stack<string> stack;
@@ -142,10 +149,6 @@ using namespace std;
         if(this->chart.empty()){
             throw runtime_error("chart is empty..");
         }
-        for(uint i = 0; i<this->chart.size();i++){
-            // cout<<"------------"<<endl;
-            cout<<this->chart.at(i)<<endl;
-        }
         return this->it;
     }
 
@@ -156,6 +159,8 @@ using namespace std;
 
         return this->chart.end();
     }
+
+    //iterate pre order on the chart
     vector<string>::iterator OrgChart::begin_preorder(){
         uint place = 0;
         vector<string> temp;
@@ -179,11 +184,6 @@ using namespace std;
                 }
                 
             }
-        }
-        // temp.push_back(this->chart1.at(0).data);
-        for(uint i = 0; i<temp.size();i++){
-            // cout<<"------------"<<endl;
-            cout<<temp.at(i)<<endl;
         }
         this->chart = temp;
         this->it=this->chart.begin();
@@ -210,6 +210,12 @@ using namespace std;
     }
     vector<string>::iterator OrgChart::begin(){
         uint place = 0;
+        vector<string> temp;
+        for (auto it = this->begin_level_order(); it != this->end_level_order(); ++it)
+        {
+            temp.push_back(*it);
+        }
+        this->chart = temp;
         this->it = this->chart.begin();
         return this->it;
     }
@@ -224,7 +230,6 @@ using namespace std;
         return *this->it;
     }
     int OrgChart::size(){
-        
         return this->chart.at(place++).size();
     }
 
